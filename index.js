@@ -1,17 +1,9 @@
 const mysql = require("mysql2");
 const inquirer = require("inquirer");
 const consoleTable = require("console.table");
-const express = require("express");
-
-const app = express();
-
-app.use(express.urlencoded({ extended: false }));
-app.use(express.json());
-
-
 
 const db = mysql.createConnection({
-  host: "localhost",
+  host: "127.0.0.1",
   user: "root",
   password: "",
   database: "employeeTrackerDB",
@@ -55,6 +47,8 @@ const menuOptions = [
       choices: [],
     },
   ];
+  
+  let roles=[];
   const addEmployeePrompts = [
     {
       type: "input",
@@ -70,7 +64,7 @@ const menuOptions = [
       type: "list",
       name: "role_id",
       message: "What is employee's role?",
-      choices: allRoles,
+      choices: roles,
     },
     {
       type: "list",
@@ -80,12 +74,13 @@ const menuOptions = [
     },
   ];
 
+  let managers=[];
   const deleteEmployeePrompts = [
     {
       type: "list",
       name: "chosenOption",
       message: "Which employee would you like to delete?",
-      choices: allManagers,
+      choices: managers,
     },
   ];
   const deleteRolePrompts = [
@@ -93,24 +88,25 @@ const menuOptions = [
       type: "list",
       name: "chosenOption",
       message: "Which role would you like to delete?",
-      choices: allRoles,
+      choices: roles,
     },
   ];
+  let departments=[];
   const deleteDepartmentPrompts = [
     {
       type: "list",
       name: "chosenOption",
       message: "Which department would you like to delete?",
-      choices: allDepartments,
+      choices: departments,
     },
   ];
-
+  
   const viewManagerPrompts = [
     {
       type: "list",
       name: "managerToBeViewed",
       message: "Which manager would you like to view?",
-      choices: allManagers,
+      choices: managers,
     },
   ];
   const viewDepartmentPrompts = [
@@ -118,7 +114,45 @@ const menuOptions = [
       type: "list",
       name: "departmentToBeViewed",
       message: "Which department would you like to view?",
-      choices: allDepartments,
+      choices: departments,
     },
   ];
 
+
+  async function init(){
+    const chosenOption = await inquirer.prompt(menuPrompts);
+    switch (chosenOption.choice){
+      case menuOptions[0]:
+        console.log("View All Employees")
+      case menuOptions[1]:
+        console.log(menuOptions[1])
+      case menuOptions[2]:
+        console.log(menuOptions[2])
+      case menuOptions[3]:
+        console.log(menuOptions[3])
+      case menuOptions[4]:
+        console.log(menuOptions[4])
+      case menuOptions[5]:
+        console.log(menuOptions[5])
+      case menuOptions[6]:
+        console.log(menuOptions[6])
+      case menuOptions[7]:
+        console.log(menuOptions[7])
+      case menuOptions[8]:
+        console.log(menuOptions[8])
+      case menuOptions[9]:
+        console.log(menuOptions[9])
+      case menuOptions[10]:
+        console.log(menuOptions[10])
+      case menuOptions[11]:
+        console.log(menuOptions[11])
+      case menuOptions[12]:
+        console.log(menuOptions[12])
+      case menuOptions[13]:
+        console.log(menuOptions[13])
+      case menuOptions[14]:
+        process.exit();
+    }
+}
+
+init();
